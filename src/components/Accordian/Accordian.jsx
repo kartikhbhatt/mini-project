@@ -1,31 +1,40 @@
+//single selection
+//multiple selection
+
 import { useState } from "react";
 import data from "./Data";
+import "./styles.css";
 
-const Accordian = () => {
-   const [getId, setGetId] = useState(false);
+export default function Accordian() {
+   const [selected, setSelected] = useState(null);
 
-   const handleExpand = (id) => {
-      setGetId(getId === id ? null : id);
-   };
+   function handleSingleSelection(getCurrentId) {
+      setSelected(getCurrentId === selected ? null : getCurrentId);
+   }
 
    return (
-      <div className="section-accordian flex flex-col  ">
-         {data &&
-            data.map((item) => (
-               <div className="accordian-content m-3" key={item.id}>
-                  <div
-                     className="question"
-                     onClick={() => handleExpand(item.id)}
-                  >
-                     <b>{item.question}</b>
-                     <span>+</span>
+      <div className="acc-wrapper">
+         <div className="accordian">
+            {data && data.length > 0 ? (
+               data.map((dataItem) => (
+                  <div className="item" key={dataItem.id}>
+                     <div
+                        onClick={() => handleSingleSelection(dataItem.id)}
+                        className="title"
+                     >
+                        <h3>{dataItem.question}</h3>
+                        <span>+</span>
+                     </div>
 
-                     {getId === item.id && <p>{item.answer}</p>}
+                     {selected === dataItem.id ? (
+                        <div className="content">{dataItem.answer}</div>
+                     ) : null}
                   </div>
-               </div>
-            ))}
+               ))
+            ) : (
+               <div>No data found !</div>
+            )}
+         </div>
       </div>
    );
-};
-
-export default Accordian;
+}
