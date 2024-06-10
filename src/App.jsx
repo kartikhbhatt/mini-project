@@ -3,7 +3,9 @@ import "./App.css";
 // import RandomColor from "./components/RandomColor";
 // import StarRating from "./components/StarRating";
 // import ImageSlider from "./components/ImageSlider";
-import LoadMore from "./components/LoadMore";
+// import LoadMore from "./components/LoadMore";
+import MenuUI from "./components/Menu";
+import menus from "./components/Menu/data";
 
 function App() {
    return (
@@ -16,7 +18,8 @@ function App() {
             limit={"15"}
             page={"1"}
          /> */}
-         <LoadMore />
+         {/* <LoadMore /> */}
+         <MenuUI menus={menus} />
       </>
    );
 }
